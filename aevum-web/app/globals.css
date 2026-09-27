@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --void: #050508;
+  --violet: #8b5cf6;
+  --blue: #3b82f6;
+  --cyan: #67e8f9;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--void);
+  color: #fff;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.4);
+  color: #fff;
+}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #07070c;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4c1d95, #1e3a8a);
+  border-radius: 8px;
+  border: 2px solid #07070c;
+}
+
+/* ---------- film grain ---------- */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ---------- glass ---------- */
+.glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.glass-strong {
+  background: linear-gradient(135deg, rgba(20, 20, 32, 0.85), rgba(10, 10, 18, 0.9));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- gradient text ---------- */
+.text-gradient {
+  background: linear-gradient(100deg, #c4b5fd 0%, #8b5cf6 35%, #60a5fa 70%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- ambient glows ---------- */
+.glow-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+/* ---------- keyframes ---------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1.5deg); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 12px 2px currentColor; }
+  50% { opacity: 0.55; box-shadow: 0 0 4px 0px currentColor; }
+}
+
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.06); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes blink-caret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-soft { animation: float-soft 7s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 22s linear infinite; }
+.animate-spin-reverse { animation: spin-reverse 30s linear infinite; }
+.animate-pulse-dot { animation: pulse-dot 2.2s ease-in-out infinite; }
+.animate-glow-breathe { animation: glow-breathe 5s ease-in-out infinite; }
+.animate-marquee { animation: marquee 32s linear infinite; }
+.animate-rise-in { animation: rise-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.shimmer-text {
+  background: linear-gradient(110deg, #fff 30%, #c4b5fd 45%, #93c5fd 55%, #fff 70%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+/* ---------- buttons ---------- */
+.btn-primary {
+  position: relative;
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 45%, #4f46e5 100%);
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.35) inset,
+    0 12px 40px -8px rgba(124, 58, 237, 0.65),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, filter 0.25s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.12);
+  box-shadow:
+    0 0 0 1px rgba(196, 181, 253, 0.5) inset,
+    0 18px 56px -8px rgba(124, 58, 237, 0.8),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(167, 139, 250, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -12px rgba(139, 92, 246, 0.4);
+}
+
+/* ---------- cards ---------- */
+.card-hover {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  border-color: rgba(139, 92, 246, 0.35);
+  box-shadow: 0 30px 70px -24px rgba(124, 58, 237, 0.35), 0 24px 80px -24px rgba(0, 0, 0, 0.8);
+}
+
+/* ---------- nav link underline ---------- */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, #a78bfa, #60a5fa);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ---------- pedestal reflection ---------- */
+.pedestal-reflection {
+  background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.35) 0%, rgba(59, 130, 246, 0.12) 45%, transparent 70%);
+  filter: blur(18px);
+}
+
+/* ---------- demo chat caret ---------- */
+.caret::after {
+  content: "▍";
+  color: #a78bfa;
+  animation: blink-caret 1s steps(1) infinite;
+  margin-left: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
